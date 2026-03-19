@@ -1,0 +1,40 @@
+application {
+  config {
+    baseName projet20
+    packageName com.projet20
+    authenticationType jwt
+    buildTool maven
+    databaseType sql
+    devDatabaseType h2Disk
+    prodDatabaseType postgresql
+    enableTranslation Boolean
+    jhiPrefix jhi
+    nativeLanguage fr
+    serverPort 8081
+    testFrameworks [cypress]
+    reactive Boolean
+  }
+}
+
+entity Product {
+  name String required
+  price BigDecimal required
+  stock Integer
+}
+
+entity Category {
+  name String required
+}
+
+relationship ManyToOne {
+  Product{category} to Category
+}
+
+dto Product with mapstruct
+dto Category with mapstruct
+
+service Product with serviceImpl
+service Category with serviceImpl
+
+paginate Product with pagination
+paginate Category with pagination
